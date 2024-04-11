@@ -48,14 +48,14 @@ class Bloc<STATE : Any, ACTION : Any>(
             .launchIn(scope)
     }
 
-    private suspend fun transformAction(action: ACTION): Flow<ACTION> {
+    private fun transformAction(action: ACTION): Flow<ACTION> {
         return actionTransformer.transformActions(action)
             .catch {
                 emitAll(errorMapper.mapErrorToAction(currentState, action, it))
             }
     }
 
-    private suspend fun mapActionToState(action: ACTION): Flow<Transition<STATE, ACTION>> {
+    private fun mapActionToState(action: ACTION): Flow<Transition<STATE, ACTION>> {
         return actionMapper.mapActionToState(action, currentState)
             .catch {
                 emitAll(errorMapper.mapErrorToState(currentState, action, it))

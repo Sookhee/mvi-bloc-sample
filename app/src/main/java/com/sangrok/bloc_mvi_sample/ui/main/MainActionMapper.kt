@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.onStart
 class MainActionMapper(
     private val memberRepository: MockRepository,
 ) : ActionMapper<MainState, MainAction> {
-    override suspend fun mapActionToState(action: MainAction, state: MainState): Flow<MainState> {
+    override fun mapActionToState(action: MainAction, state: MainState): Flow<MainState> {
         return when (action) {
             MainAction.ClickButton -> clickButton(state, action)
             is MainAction.ClickTab -> clickTab(state, action)

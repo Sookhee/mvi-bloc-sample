@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 
 class DefaultErrorMapper<STATE, ACTION> : ErrorMapper<STATE, ACTION> {
-    override suspend fun mapErrorToAction(
+    override fun mapErrorToAction(
         state: STATE,
         action: ACTION,
         throwable: Throwable
@@ -13,7 +13,7 @@ class DefaultErrorMapper<STATE, ACTION> : ErrorMapper<STATE, ACTION> {
         return emptyFlow()
     }
 
-    override suspend fun mapErrorToState(
+    override fun mapErrorToState(
         state: STATE,
         action: ACTION,
         throwable: Throwable
@@ -23,7 +23,7 @@ class DefaultErrorMapper<STATE, ACTION> : ErrorMapper<STATE, ACTION> {
 }
 
 class DefaultActionTransFormer<ACTION> : ActionTransformer<ACTION> {
-    override suspend fun transformActions(action: ACTION): Flow<ACTION> {
+    override fun transformActions(action: ACTION): Flow<ACTION> {
         return flowOf(action)
     }
 
