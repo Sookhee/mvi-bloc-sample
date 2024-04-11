@@ -14,6 +14,8 @@ class MainActionMapper(
         return when (action) {
             MainAction.ClickButton -> clickButton(state, action)
             is MainAction.ClickTab -> clickTab(state, action)
+            is MainAction.SetMemberState -> setMemberState(state, action)
+            else -> flow { emit(state) }
         }
     }
 
@@ -44,5 +46,14 @@ class MainActionMapper(
                 members = filteredMembers
             )
         )
+    }
+
+    private fun setMemberState(state: MainState, action: MainAction.SetMemberState): Flow<MainState> = flow {
+        emit(state.copy(
+            members = state.members.map {
+                if (it.name == action.member.name) action.member
+                else it
+            }
+        ))
     }
 }

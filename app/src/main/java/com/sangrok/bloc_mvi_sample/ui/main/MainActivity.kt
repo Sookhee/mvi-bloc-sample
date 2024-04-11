@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -89,10 +88,10 @@ fun MainScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        items(state.members) {
+                        items(state.members) { member ->
                             Row {
-                                Text(it.name, fontSize = 24.sp)
-                                //Toggle
+                                Text(member.name, fontSize = 24.sp)
+                                Toggle(selected = member.liked, onSelectedChange = { onAction(MainAction.ToggleAction(member)) })
                             }
                         }
                     }
