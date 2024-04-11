@@ -7,4 +7,8 @@ sealed class MainAction : ViewAction {
 
     data class ClickTab(val selectedTab: Tab) : MainAction()
 
+    data class ToggleAction(val member: Member): MainAction()
+
+    data class SetMemberState(val member: Member): MainAction()
+
 }
